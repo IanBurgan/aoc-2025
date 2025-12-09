@@ -57,8 +57,20 @@ for i, box_a in enumerate(boxes):
 distances.sort(key=itemgetter(0))
 
 circuits, last_pair = get_circuits(1000, distances)
-print("Part One:", circuits[0] * circuits[1] * circuits[2])
+part_one = circuits[0] * circuits[1] * circuits[2]
 
+part_two = 0
 lower, upper = 1000, len(distances)
+while upper > lower:
+    next = (lower + upper) // 2
+    circuits, last_pair = get_circuits(next, distances)
 
-# todo binary search for p2
+    if len(circuits) == 1:
+        upper = next - 1
+    else:
+        lower = next + 1
+
+    part_two = last_pair[0][0] * last_pair[1][0]
+
+print("Part One:", part_one)
+print("Part Two:", part_two)
