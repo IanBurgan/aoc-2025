@@ -1,5 +1,12 @@
 from typing import Callable, Any, Union
 
+def read_file(file_name: str):
+    f = open(file_name, "r")
+    result = f.read().strip()
+    f.close()
+
+    return result
+
 
 def parse_input(
     file_name: str,
@@ -10,6 +17,7 @@ def parse_input(
 ) -> list[Any]:
     f = open(file_name, "r")
     result = f.read().strip()
+    f.close()
 
     if not groups:
         result = result.split(sep)
